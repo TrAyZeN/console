@@ -14,7 +14,10 @@ $(LIBDIR)/libconsole.a: $(LIBDIR)/console.o
 	ar -q $@ $<
 
 .PHONY: examples
-examples: rainbow
+examples: rainbow circles
+
+circles: examples/circles.c
+	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) -L lib/ -lconsole
 
 rainbow: examples/rainbow.c
 	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) -L lib/ -lconsole
@@ -27,3 +30,4 @@ mrproper:
 .PHONY: clean
 clean:
 	rm -f $(LIBDIR)/*.o
+	rm -f rainbow circles
